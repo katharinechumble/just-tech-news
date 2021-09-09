@@ -91,6 +91,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/upvote', (req, res) => {
+  if (req.session){
   // custom static method created in models/Post.js
   Post.upvote(req.body, { Vote, Comment, User })
     .then(updatedVoteData => res.json(updatedVoteData))
@@ -98,6 +99,7 @@ router.put('/upvote', (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
+  }
 });
 
 router.put('/:id', (req, res) => {
